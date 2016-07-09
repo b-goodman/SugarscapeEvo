@@ -60,12 +60,14 @@ webInstall := (
    );
 
 
-Print@Deploy@Column[{
-    TextCell@"Installation will create the following directories: ",
-    Column@Rest@installDir,
-    TextCell@"And download & export the following files: ",
-    TableForm[instalFiles[[All, 2 ;; 3]], 
-     TableHeadings -> {None, {"File", "URL"}}],
-    Button["Install", webInstall, Method -> "Queued", 
-     Enabled -> Dynamic[Not[isInstalling]], ImageSize -> {90, 30}]
-    }, Spacings -> 1]
+CreateDocument[{
+  Deploy@Column[{TextCell@
+      "Installation will create the following directories: ", 
+     Column@Rest@installDir, 
+     TextCell@"And download & export the following files: ", 
+     TableForm[instalFiles[[All, 2 ;; 3]], 
+      TableHeadings -> {None, {"File", "URL"}}], 
+     Button["Install", webInstall, Method -> "Queued", 
+      Enabled -> Dynamic[Not[isInstalling]], ImageSize -> {90, 30}]}, 
+    Spacings -> 1]
+  }]
