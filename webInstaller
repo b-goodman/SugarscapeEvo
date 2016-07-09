@@ -33,16 +33,6 @@ test.config.sgr"},
 Test_Session_06_07.session.sgr"}
    };
 
-Deploy@Column[{
-   TextCell@"Installation will create the following directories: ",
-   Column@Rest@installDir,
-   TextCell@"And download & export the following files: ",
-   TableForm[instalFiles[[All, 2 ;; 3]], 
-    TableHeadings -> {None, {"File", "URL"}}],
-   Button["Install", webInstall, Method -> "Queued", 
-    Enabled -> Dynamic[Not[isInstalling]], ImageSize -> {90, 30}]
-   }, Spacings -> 1]
-
 webInstall := (
    isInstalling = True;
    (* create directories *)
@@ -68,3 +58,14 @@ webInstall := (
    Print["Web install complete."];
    << sugarLaunch`
    );
+
+
+Print@Deploy@Column[{
+    TextCell@"Installation will create the following directories: ",
+    Column@Rest@installDir,
+    TextCell@"And download & export the following files: ",
+    TableForm[instalFiles[[All, 2 ;; 3]], 
+     TableHeadings -> {None, {"File", "URL"}}],
+    Button["Install", webInstall, Method -> "Queued", 
+     Enabled -> Dynamic[Not[isInstalling]], ImageSize -> {90, 30}]
+    }, Spacings -> 1]
