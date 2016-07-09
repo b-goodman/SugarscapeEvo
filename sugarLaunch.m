@@ -2,7 +2,7 @@
 
 BeginPackage["`launchSugarscape`"];
 (* load *)
-Get[FileNameJoin[{$UserBaseDirectory,"Applications","evoScape","lib","sugarInterface.m"}]];
+Get[FileNameJoin[{$UserBaseDirectory,"Applications","Sugarscape+","lib","sugarInterface.m"}]];
 
 (* initilize main user interface - must be done on first evaluation *)
 initilizeMainUserInterface;
