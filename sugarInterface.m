@@ -2,7 +2,7 @@
 
 BeginPackage["`userInterfaceSugarscape`"];
 (* load functions *)
-Get@FileNameJoin[{$UserBaseDirectory,"Applications","evoScape","lib","sugarFunctions.m"}];
+Get@FileNameJoin[{$UserBaseDirectory,"Applications","Sugarscape+","lib","sugarFunctions.m"}];
 
 evaluateSugarscape:=(
 session["lastEval"]=DateString[];
