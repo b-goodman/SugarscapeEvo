@@ -8,8 +8,8 @@ Get[FileNameJoin[{$UserBaseDirectory,"Applications","Sugarscape+","lib","sugarIn
 initilizeMainUserInterface;
 
 (* (re)opens main user interface.  Will resume from last state unless re-initilized. *)
-(*viewMainUserInterface;*)
+viewMainUserInterface;
 
-Print["evoScape v0.1 \n Evaluate viewMainUserInterface to begin"] 
+Print["sugarscape+ v0.1"] 
 
 EndPackage[];
