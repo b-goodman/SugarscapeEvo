@@ -82,7 +82,7 @@ initilizeConfiguration;
 (* load and set preset config file *)
 defaultSimulationParamaters=Uncompress[
 Import[
-FileNameJoin[{$UserBaseDirectory,"Applications","evoScape","lib","default.config.sgr"}]
+FileNameJoin[{$UserBaseDirectory,"Applications","Sugarscape+","lib","default.config.sgr"}]
 ]
 ];
 
