@@ -116,14 +116,14 @@ valueField=InputField[Dynamic[simulationParamaters["input"][#]["value"]],Number,
 
 (* saves simulation configuration as file *)
 saveConfig:=(
-SetDirectory@FileNameJoin[{$UserBaseDirectory,"Applications","evoScape","config"}];
+SetDirectory@FileNameJoin[{$UserBaseDirectory,"Applications","Sugarscape+","config"}];
 Export[StringReplace[simulationParamaters["meta"]["name"]," "->"_"]<>".config.sgr",Compress@simulationParamaters,"String"];
 ResetDirectory[];
 );
 
 (* loads presaved configuration file and applys to current session *)
 loadConfig:=With[{
-importFilePath=SystemDialogInput["FileOpen",FileNameJoin[{$UserBaseDirectory,"Applications","evoScape","config"}],WindowTitle->"Load Configuration..."]
+importFilePath=SystemDialogInput["FileOpen",FileNameJoin[{$UserBaseDirectory,"Applications","Sugarscape+","config"}],WindowTitle->"Load Configuration..."]
 },
 If[importFilePath=!=$Canceled,
 If[Last@StringSplit[FileBaseName[importFilePath],"."]=="config",
@@ -137,7 +137,7 @@ configInterfaceMsg="Import Cancelled"
 
 (* saves session *)
 sessionSave:=(
-SetDirectory@FileNameJoin[{$UserBaseDirectory,"Applications","evoScape","session"}];
+SetDirectory@FileNameJoin[{$UserBaseDirectory,"Applications","Sugarscape+","session"}];
 Export[StringReplace[session["sessionName"],{" "->"_","/"->"_"}]<>".session.sgr",Compress@session,"String"];
 ResetDirectory[];
 mainInterfaceMsg=session["sessionName"]<>" saved.";
@@ -145,7 +145,7 @@ mainInterfaceMsg=session["sessionName"]<>" saved.";
 
 (* load and apply session from file *)
 sessionLoad:=With[{
-importSessionPath=SystemDialogInput["FileOpen",FileNameJoin[{$UserBaseDirectory,"Applications","evoScape","session"}],WindowTitle->"Load Session"]
+importSessionPath=SystemDialogInput["FileOpen",FileNameJoin[{$UserBaseDirectory,"Applications","Sugarscape+","session"}],WindowTitle->"Load Session"]
 },
 If[importSessionPath=!=$Canceled,
 If[Last@StringSplit[FileBaseName[importSessionPath],"."]=="session",
@@ -215,7 +215,7 @@ ActionMenu["File",{
 "Load Session..":>sessionLoad,
 Style["Save Sesion",If[session=!=Null,Black,Gray]]:>If[session=!=Null,sessionSave,mainInterfaceMsg="No session avaliable"],
 Delimiter,
-"View Working Directory":>SystemOpen@FileNameJoin[{$UserBaseDirectory,"Applications","evoScape"}]
+"View Working Directory":>SystemOpen@FileNameJoin[{$UserBaseDirectory,"Applications","Sugarscape+"}]
 },
 Method->"Queued",
 Enabled->Dynamic@Not[inEval]
