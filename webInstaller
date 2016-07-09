@@ -44,14 +44,14 @@ webInstall := (
    Print["Installing.."];
    Do[
     (* set export destination (1) *)
-    Print[instalFiles[[(*i*)j, 2]]];
-    SetDirectory[instalFiles[[(*i*)j, 1]]];
+    Print[instalFiles[[j, 2]]];
+    SetDirectory[instalFiles[[j, 1]]];
     Export[
-     (* name (2)*)instalFiles[[(*i*)j, 2]],
-     (* content (3)*) URLFetch[instalFiles[[(*i*)j, 3]]],
+     (* name (2)*)instalFiles[[j, 2]],
+     (* content (3)*) URLFetch[instalFiles[[j, 3]]],
      "String"
      ],
-    {i, j, Length[instalFiles]}
+    {j, 1, Length[instalFiles]}
     ];
    
    (* launch package *)
