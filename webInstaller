@@ -1,0 +1,70 @@
+isInstalling = False;
+
+installDir = {
+   FileNameJoin[{$UserBaseDirectory, "Applications"}],
+   FileNameJoin[{$UserBaseDirectory, "Applications", "Sugarscape+"}],
+   FileNameJoin[{$UserBaseDirectory, "Applications", "Sugarscape+", 
+     "lib"}],
+   FileNameJoin[{$UserBaseDirectory, "Applications", "Sugarscape+", 
+     "config"}],
+   FileNameJoin[{$UserBaseDirectory, "Applications", "Sugarscape+", 
+     "session"}]
+   };
+
+instalFiles = {
+   (* destination, name, URL *)
+   {installDir[[1]], "sugarLaunch.m", 
+    "https://raw.githubusercontent.com/b-goodman/SugarscapeEvo/master/\
+sugarLaunch.m"},
+   {installDir[[3]], "sugarFunctions.m", 
+    "https://raw.githubusercontent.com/b-goodman/SugarscapeEvo/master/\
+sugarFunctions.m"},
+   {installDir[[3]], "sugarInterface.m", 
+    "https://raw.githubusercontent.com/b-goodman/SugarscapeEvo/master/\
+sugarInterface.m"},
+   {installDir[[3]], "default.config.sgr", 
+    "https://raw.githubusercontent.com/b-goodman/SugarscapeEvo/master/\
+default.config.sgr"},
+   {installDir[[4]], "demo.config.sgr", 
+    "https://raw.githubusercontent.com/b-goodman/SugarscapeEvo/master/\
+test.config.sgr"},
+   {installDir[[5]], "demo.session.sgr", 
+    "https://raw.githubusercontent.com/b-goodman/SugarscapeEvo/master/\
+Test_Session_06_07.session.sgr"}
+   };
+
+Deploy@Column[{
+   TextCell@"Installation will create the following directories: ",
+   Column@Rest@installDir,
+   TextCell@"And download & export the following files: ",
+   TableForm[instalFiles[[All, 2 ;; 3]], 
+    TableHeadings -> {None, {"File", "URL"}}],
+   Button["Install", webInstall, Method -> "Queued", 
+    Enabled -> Dynamic[Not[isInstalling]], ImageSize -> {90, 30}]
+   }, Spacings -> 1]
+
+webInstall := (
+   isInstalling = True;
+   (* create directories *)
+   Print["Creating directories in " <> 
+       FileNameJoin[{$UserBaseDirectory, "Applications"}];]
+    CreateDirectory /@ Rest[installDir];
+   
+   (* download and export files *)
+   Print["Installing.."];
+   Do[
+    (* set export destination (1) *)
+    Print[instalFiles[[(*i*)j, 2]]];
+    SetDirectory[instalFiles[[(*i*)j, 1]]];
+    Export[
+     (* name (2)*)instalFiles[[(*i*)j, 2]],
+     (* content (3)*) URLFetch[instalFiles[[(*i*)j, 3]]],
+     "String"
+     ],
+    {i, j, Length[instalFiles]}
+    ];
+   
+   (* launch package *)
+   Print["Web install complete."];
+   << sugarLaunch`
+   );
